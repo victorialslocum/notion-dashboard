@@ -1,0 +1,16 @@
+{
+  "name": "notion-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dashboard.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@notionhq/client": "^0.2.4",
+    "dotenv": "^10.0.0"
+  }
+}
