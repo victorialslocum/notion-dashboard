@@ -4,7 +4,7 @@
   "description": "",
   "main": "dashboard.js",
   "scripts": {
-    "start": "node index"
+    "start": "node server"
   },
   "keywords": [],
   "author": "",
