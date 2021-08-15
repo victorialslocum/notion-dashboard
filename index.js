@@ -14,6 +14,7 @@ exports.getDatabase = async function () {
       id: page.id,
       task: page.properties.Task.title[0]?.plain_text,
       completed: page.properties.Completed.checkbox,
+      category: page.properties.Category.select.name,
     };
   });
 
