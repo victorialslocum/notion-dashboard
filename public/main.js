@@ -8,6 +8,12 @@ const getDataFromBackend = async () => {
     return data;
 };
 
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + "-" + mm + "-" + dd;
 
 const doEverything = async () => {
 
@@ -31,7 +37,7 @@ const doEverything = async () => {
                 completed: element.completed,
                 enddate: element.enddate,
             });
-            });
+        });
 
         console.log(sortDatabase);
         console.log(sortDatabase.School);
@@ -41,151 +47,71 @@ const doEverything = async () => {
 
         keys.forEach((key) => {
             let items = sortDatabase[key]
-            var data = [];
-            let chartTitle = key + " Notion Tasks"
+            var dataUndone = [];
+            var dataCompleted = [];
+            let chartTitleText = key + " Tasks"
 
             console.log(items)
 
             items.forEach((item) => {
-                if (item.completed == true) {
-                    data.push({x: item.task, value: 1, fill: "#069CCD"})
-                } else {
-                    data.push({x: item.task, value: 1, fill: "#7BB9E7"})
+                if (item.enddate.start >= today || item.enddate.start == "2021-08-01") {
+                    if (item.completed == true) {
+                        dataCompleted.push({x: item.task, value: 1, fill: "#36abd9"})
+                    } else {
+                        dataUndone.push({x: item.task, value: 1, fill: anychart.color.lighten("#36abd9")})
+                    }
+
                 }
-        })
+            })
+
+            var data = dataUndone.concat(dataCompleted);
+
+            var chart = anychart.pie();
+            chart.labels(false);
         
-        var chart = anychart.pie();
-    
-        var legend = chart.legend();
-        legend.enabled(true);
-        legend.align("center")
-        legend.position("right")
-        legend.itemsLayout("vertical")
-    
-        // set the chart title
-        chart.title(chartTitle);
-    
-        // add the data
-        chart.data(data);
-    
-        // create container
-        const chartContainer = document.createElement("div")
-        chartContainer.classList.add("container")
-        container.appendChild(chartContainer)   
+            var legend = chart.legend();
+            legend.enabled(true);
+            legend.align("center")
+            legend.position("right")
+            legend.itemsLayout("vertical")
+            legend.height("100%")
+            legend.width("50%")
+            legend.padding("20%")
 
-        // display the chart in the container
-        chart.container(chartContainer);
-        chart.draw();
+            var title = chart.legend().title();
+            title.useHtml(true);
+            title.enabled(true);
+            title.text("Tasks" + "<br><a style=\"color:#0000FF; font-size: 10px;\">");
+            // set font size and align
+            title.fontSize(14);
+            title.hAlign("center");
 
-    });
-            // https://stackoverflow.com/questions/40774697/how-to-group-an-array-of-objects-by-key
-
-            // const groupCategory = _.groupBy(item, item.category));
-            // console.log(groupCategory.get("School"));
-
-            // item.forEach((category) => {
-            //     console.log(item)
-            //     var data = [];
-
-            //     if (item.completed == true) {
-            //         data.push({x: item.task, value: 1, fill: "#069CCD"})
-            //     } else {
-            //         data.push({x: item.task, value: 1, fill: "#7BB9E7"})
-            //     }
-                
-            //     var chart = anychart.pie();
+            // tune legend tooltip content appearance
+            var tooltip = chart.tooltip();
+            tooltip.useHtml(true);
+            tooltip.enabled(true);
+            tooltip.format("")
         
-            //     chart.legend(false);
-            
-            //     // set the chart title
-            //     chart.title("Daily Notion tasks");
-            
-            //     // add the data
-            //     chart.data(data);
-            
-            //     // create container
-            //     const chartContainer = document.createElement("div")
-            //     chartContainer.classList.add("container")
-            //     container.appendChild(chartContainer)   
-
-            //     // display the chart in the container
-            //     chart.container(chartContainer);
-            //     chart.draw();
-            // })
-
-        // set the data
-    //     var dataPersonal = [];
-    //     var dataDaily = [];
-    //     var dataSchool = [];
-    
-    //     database.forEach((item) => {
-    //         if (item.category == "Daily") {
-    //             if (item.completed == true) {
-    //             dataDaily.push({x: item.task, value: 1, fill: "#069CCD"})
-    //             } else {
-    //             dataDaily.push({x: item.task, value: 1, fill: "#7BB9E7"})
-    //             }
-    //         } else if (item.category == "School") {
-    //             if (item.completed == true) {
-    //             dataSchool.push({x: item.task, value: 1, fill: "#069CCD"})
-    //             } else {
-    //             dataSchool.push({x: item.task, value: 1, fill: "#7BB9E7"})
-    //             }
-    //         } else if (item.category == "Personal") {
-    //             if (item.completed == true) {
-    //             dataPersonal.push({x: item.task, value: 1, fill: "#069CCD"})
-    //             } else {
-    //             dataPersonal.push({x: item.task, value: 1, fill: "#7BB9E7"})
-    //             }
-    //         }
-    //     })
-    
-    //     // create the chart
-    //     var chartDaily = anychart.pie();
+            // set the chart title
+            var chartTitle = chart.title();
+            chartTitle.enabled(true);
+            chartTitle.text(chartTitleText)
+            chartTitle.fontSize(30)
+            chartTitle.fontDecoration("underline")
         
-    //     chartDaily.legend(false);
-    
-    //     // set the chart title
-    //     chartDaily.title("Daily Notion tasks");
-    
-    //     // add the data
-    //     chartDaily.data(dataDaily);
-    
-    //     // display the chart in the container
-    //     chartDaily.container(container1);
-    //     chartDaily.draw();
+            // add the data
+            chart.data(data);
+        
+            // create container
+            const chartContainer = document.createElement("div")
+            chartContainer.classList.add("container")
+            container.appendChild(chartContainer)   
 
+            // display the chart in the container
+            chart.container(chartContainer);
+            chart.draw();
 
-    //     // create the chart
-    //     var chartSchool = anychart.pie();
-    
-    //     chartSchool.legend(false);
-
-    //     // set the chart title
-    //     chartSchool.title("School Notion tasks");
-    
-    //     // add the data
-    //     chartSchool.data(dataSchool);
-    
-    //     // display the chart in the container
-    //     chartSchool.container(container2);
-    //     chartSchool.draw();
-
-
-    //     // create the chart
-    //     var chartPersonal = anychart.pie();
-    
-    //     chartPersonal.legend(false);
-
-    //     // set the chart title
-    //     chartPersonal.title("Personal Notion tasks");
-    
-    //     // add the data
-    //     chartPersonal.data(dataPersonal);
-    
-    //     // display the chart in the container
-    //     chartPersonal.container(container3);
-    //     chartPersonal.draw();
+        });
     
     });
  
