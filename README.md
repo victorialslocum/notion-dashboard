@@ -15,7 +15,7 @@ There's a lot to do here still, and a lot of features I want to add. I've learne
 - [ ] get rid of undefined error with undefined dates
 - [ ] better legend alignment on pie charts
 - [ ] compatibility with epic progress
-- [ ] other people accessible w/o code :) @Ben Potter will help
+- [ ] other people accessible :) @Ben Potter will help
 - [ ] how to link to a notion template?
 
 ## Things to remember 
@@ -27,4 +27,4 @@ https://getbootstrap.com/docs/4.0/components/progress/
 - for the progress bar? Look other options 
 
 
-Anyways, hi, I'm Victoria, and you can find my website here: [victoriaslocum.com](https://victoriaslocum.com)
+### Anyways, hi, I'm Victoria, and you can find my website here: [victoriaslocum.com](https://victoriaslocum.com)

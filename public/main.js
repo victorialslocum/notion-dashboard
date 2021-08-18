@@ -81,11 +81,18 @@ const doEverything = async () => {
             var title = chart.legend().title();
             title.useHtml(true);
             title.enabled(true);
-            title.text("Tasks" + "<br><a style=\"color:#0000FF; font-size: 10px;\">");
+            title.text("Tasks");
             // set font size and align
-            title.fontSize(14);
-            title.hAlign("left");
+            title.fontSize(20);
+            title.align("left");
 
+            // enable and configure the title separator
+            var separator = chart.legend().titleSeparator()
+            separator.enabled(true);
+            separator.height(4);
+            separator.fill("none");
+            separator.stroke("#96a6a6", 1);
+            
             // tune legend tooltip content appearance
             var tooltip = chart.tooltip();
             tooltip.useHtml(true);
