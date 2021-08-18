@@ -1,11 +1,11 @@
-### Hello there! 
-# Welcome to the WIP Notion Progress Dashboard 
+# Hello there! 
+### Welcome to the WIP Notion Progress Dashboard 
 
 This is my first API project, and I have absolutely fallen in love with Notion in the past year. It has completely revolutionized my productivity.   
 
 I've always wanted there to be some way I can track my progress to completing my goals, and I revamped my to do list for this, but was still missing an important part of the motivation process: progress bars and charts!!  
 
-# First API, big step in motivation 
+### First API, big step in motivation 
 
 There's a lot to do here still, and a lot of features I want to add. I've learned a ton about working with APIs so far and can't wait to learn more. 
  ## To Do List 
