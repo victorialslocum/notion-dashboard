@@ -71,7 +71,7 @@ const doEverything = async () => {
         
             var legend = chart.legend();
             legend.enabled(true);
-            legend.align("center")
+            legend.align("left")
             legend.position("right")
             legend.itemsLayout("vertical")
             legend.height("100%")
@@ -84,7 +84,7 @@ const doEverything = async () => {
             title.text("Tasks" + "<br><a style=\"color:#0000FF; font-size: 10px;\">");
             // set font size and align
             title.fontSize(14);
-            title.hAlign("center");
+            title.hAlign("left");
 
             // tune legend tooltip content appearance
             var tooltip = chart.tooltip();
