@@ -75,13 +75,13 @@ const makeBar = (value, title) => {
     "<div class='titleandbar'><h1>" +
     title +
     "</h1>" +
-    "<div class='progress' style='height: 75px'><div class='progress-bar' role='progressbar' style='width:" +
+    "<div class='progress' style='height: 75px'><div class='progress-bar' role='progressbar' aria-valuenow='" +
     value +
-    "%' aria-valuenow='" +
+    "' aria-valuemin='0' aria-valuemax='100' style='max-width: " +
     value +
-    "' aria-valuemin='0' aria-valuemax='100'>" +
+    "%'> <span class='title'>" +
     value +
-    "% </div> </div> </div>";
+    "%</span></div> </div> </div>";
 };
 
 const doEverything = async () => {
@@ -164,7 +164,7 @@ const doEverything = async () => {
       var data = dataUndone.concat(dataCompleted);
       var value = Math.round((completedCount / totalCount) * 100);
 
-      //   makeChart(data, chartTitleText);
+      // makeChart(data, chartTitleText);
       //   makeBar(value.toString(), chartTitleText);
     });
 
@@ -191,10 +191,10 @@ const doEverything = async () => {
 
       var data = dataUndone.concat(dataCompleted);
       var value = Math.round((completedCount / totalCount) * 100);
-      console.log(completedCount, totalCount, value)
-
-      makeChart(data, chartTitleText);
-      makeBar(value.toString(), chartTitleText);
+      if (items.length > 2) {
+        // makeChart(data, chartTitleText);
+        makeBar(value.toString(), chartTitleText);
+      }
     });
   });
 };

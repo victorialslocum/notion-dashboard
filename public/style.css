@@ -1,6 +1,6 @@
 div.container {
     width: 80vw;
-    height: 40vh;
+    height: 70vh;
     padding-top: 10vh;
     padding-bottom: 10vh;
 }
@@ -27,4 +27,28 @@ h1 {
 
 .progress-bar {
     background-color: #36abd9;
+    width: 0;
+    animation: progress 1.5s ease-in-out forwards;
+} 
+
+.title {
+opacity: 0;
+animation: show 0.35s forwards ease-in-out 0.5s;
+}
+  
+@keyframes progress {
+from {
+    width: 0;
+}
+to {
+    width: 100%;
+}
+} 
+@keyframes show  {
+from {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
 }
