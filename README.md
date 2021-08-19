@@ -10,8 +10,8 @@ I've always wanted there to be some way I can track my progress to completing my
 There's a lot to do here still, and a lot of features I want to add. I've learned a ton about working with APIs so far and can't wait to learn more. 
  ## To Do List 
  
-- [ ] make it an accessible website!
-- [ ] add progress bar + pie chart toggle
+- [ ] make it a website!
+- [x] add progress bar 
 - [x] get rid of undefined error with undefined dates
 - [x] better legend alignment on pie charts
 - [x] compatibility with epic progress
