@@ -28,6 +28,7 @@ exports.getDatabase = async function () {
     return {
       epicId: page.id,
       epic: page.properties.Name.title[0]?.plain_text,
+      date: page.properties.Date ? page.properties.Date.date : new Date("2021-08-01"),
     };
   });
 

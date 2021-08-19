@@ -17,6 +17,7 @@ There's a lot to do here still, and a lot of features I want to add. I've learne
 - [x] compatibility with epic progress
 - [ ] other people accessible :) @Ben Potter will help
 - [ ] how to link to a notion template?
+- [x] clean the code abomination
 
 ## Things to remember 
  

@@ -11,3 +11,20 @@ div.allcharts {
     flex-direction: column;
     align-items: center;
 }
+
+div.barcontainer {
+    display:flex;
+    flex-direction: column;
+    align-items: left;
+}
+div.titleandbar {
+    padding: 5vh 2vw;
+}
+
+h1 {
+    font-family: sans-serif;
+}
+
+.progress-bar {
+    background-color: #36abd9;
+}
