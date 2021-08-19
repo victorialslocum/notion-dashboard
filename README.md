@@ -12,9 +12,9 @@ There's a lot to do here still, and a lot of features I want to add. I've learne
  
 - [ ] make it an accessible website!
 - [ ] add progress bar + pie chart toggle
-- [ ] get rid of undefined error with undefined dates
-- [ ] better legend alignment on pie charts
-- [ ] compatibility with epic progress
+- [x] get rid of undefined error with undefined dates
+- [x] better legend alignment on pie charts
+- [x] compatibility with epic progress
 - [ ] other people accessible :) @Ben Potter will help
 - [ ] how to link to a notion template?
 

@@ -4,21 +4,35 @@ require("dotenv").config();
 const { Client } = require("@notionhq/client");
 // this line initializes the Notion Client using our key
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const databaseId = process.env.NOTION_API_DATABASE
+const taskDatabaseId = process.env.NOTION_API_DATABASE_TASK
+const epicDatabaseId = process.env.NOTION_API_DATABASE_EPIC
 
 exports.getDatabase = async function () {
-  const response = await notion.databases.query({ database_id: databaseId });
+  const responseTask = await notion.databases.query({ database_id: taskDatabaseId });
+  const responseEpic = await notion.databases.query({ database_id: epicDatabaseId });
 
-  const responseResults = response.results.map((page) => {
+  const taskResponseResults = responseTask.results.map((page) => {
+
     return {
       id: page.id,
       task: page.properties.Task.title[0]?.plain_text,
       completed: page.properties.Completed.checkbox,
       category: page.properties.Category.select.name,
-      enddate: page.properties.Due.date,
-      // epic: page.properties. ref: https://stackoverflow.com/questions/67913461/notion-querying-databases-and-pages-provide-limited-properties
+      enddate: page.properties.Due ? page.properties.Due.date : new Date("2021-08-01"),
+      epicID: page.properties.Epics.relation,
     };
   });
 
-  return responseResults;
+  const epicResponseResults = responseEpic.results.map((page) => {
+
+    return {
+      epicId: page.id,
+      epic: page.properties.Name.title[0]?.plain_text,
+    };
+  });
+
+  return {
+    taskResults: taskResponseResults,
+    epicResults: epicResponseResults
+  }
 };
