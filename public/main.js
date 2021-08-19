@@ -141,7 +141,7 @@ const doEverything = async () => {
       var dataCompleted = [];
       let chartTitleText = key + " Tasks";
       var completedCount = 0;
-      var totalCount = key.length;
+      var totalCount = items.length;
 
       items.forEach((item) => {
         if (
@@ -174,7 +174,7 @@ const doEverything = async () => {
       var dataCompleted = [];
       let chartTitleText = items[0].epic + " Tasks";
       var completedCount = 0;
-      var totalCount = key.length;
+      var totalCount = items.length;
 
       items.forEach((item) => {
         if (item.completed == true) {
@@ -191,8 +191,9 @@ const doEverything = async () => {
 
       var data = dataUndone.concat(dataCompleted);
       var value = Math.round((completedCount / totalCount) * 100);
+      console.log(completedCount, totalCount, value)
 
-      // makeChart(data, chartTitleText);
+      makeChart(data, chartTitleText);
       makeBar(value.toString(), chartTitleText);
     });
   });
