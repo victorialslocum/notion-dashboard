@@ -7,7 +7,7 @@ const getDatabase = moduleToFetch.getDatabase;
 const port = 8000;
 const app = express();
 
-// app.use(express.static("public"));
+app.use(express.static("public"));
 
 app.get("/users", async (req, res) => {
   const users = await getDatabase();
