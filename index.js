@@ -2,6 +2,7 @@
 require("dotenv").config();
 // the following lines are required to initialize a Notion client
 const { Client } = require("@notionhq/client");
+const { text } = require("express");
 // this line initializes the Notion Client using our key
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const taskDatabaseId = process.env.NOTION_API_DATABASE_TASK
@@ -29,6 +30,9 @@ exports.getDatabase = async function () {
       epicId: page.id,
       epic: page.properties.Name.title[0]?.plain_text,
       date: page.properties.Date ? page.properties.Date.date : new Date("2021-08-01"),
+      color: page.properties.Color.rich_text[0] ? page.properties.Color.rich_text[0].plain_text : "#36abd9",
+      bar: page.properties.Bar.checkbox,
+      pie: page.properties.Pie.checkbox,
     };
   });
 

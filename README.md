@@ -19,16 +19,10 @@ There's a lot to do here still, and a lot of features I want to add. I've learne
 - [ ] how to link to a notion template?
 - [x] clean the code abomination
 - [x] animated progress bar
-- [ ] choose order and objects to show
-- [ ] choose color for each bar (bc colors are cool)
+- [x] choose order and objects to show
+- [x] choose color for each bar (bc colors are cool)
 
 ## Things to remember 
- 
-https://docs.anychart.com/Gantt_Chart/Project_Chart 
-- can we incorperate this in the Notion timeline?
-
-https://getbootstrap.com/docs/4.0/components/progress/ 
-- for the progress bar? Look other options 
 
 idea: what if there was a way to have a single/few charts/graphs as an individual webpage so you could embed it in a notion page? like copy link to a specific chart  
 # Anyways, hi, I'm Victoria

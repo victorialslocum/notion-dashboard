@@ -26,7 +26,6 @@ h1 {
 }
 
 .progress-bar {
-    background-color: #36abd9;
     width: 0;
     animation: progress 1.5s ease-in-out forwards;
 } 

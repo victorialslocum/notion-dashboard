@@ -4,8 +4,6 @@ const barcontainer = document.getElementById("barcontainer");
 const getDataFromBackend = async () => {
   const rest = await fetch("http://localhost:8000/users");
   const data = await rest.json();
-
-  console.log(data);
   return data;
 };
 
@@ -70,7 +68,7 @@ const makeChart = (data, chartTitleText) => {
   chart.draw();
 };
 
-const makeBar = (value, title) => {
+const makeBar = (color, value, title) => {
   barcontainer.innerHTML +=
     "<div class='titleandbar'><h1>" +
     title +
@@ -79,7 +77,9 @@ const makeBar = (value, title) => {
     value +
     "' aria-valuemin='0' aria-valuemax='100' style='max-width: " +
     value +
-    "%'> <span class='title'>" +
+    "%;background-color:" +
+    color +
+    "'> <span class='title'>" +
     value +
     "%</span></div> </div> </div>";
 };
@@ -87,96 +87,77 @@ const makeBar = (value, title) => {
 const doEverything = async () => {
   const database = await getDataFromBackend();
 
-  console.log(database);
+  var sortDatabaseCategory = [];
+  var sortDatabaseEpic = [];
 
-  anychart.onDocumentReady(function () {
-    var sortDatabaseCategory = [];
-    var sortDatabaseEpic = [];
+  database.taskResults.forEach((element) => {
+    var makeCatKey = element.category;
+    if (!sortDatabaseCategory[makeCatKey]) {
+      sortDatabaseCategory[makeCatKey] = [];
+    }
 
-    database.taskResults.forEach((element) => {
-      var makeKey = element.category;
-      if (!sortDatabaseCategory[makeKey]) {
-        sortDatabaseCategory[makeKey] = [];
-      }
-
-      sortDatabaseCategory[makeKey].push({
-        task: element.task,
-        category: element.category,
-        completed: element.completed,
-        enddate: element.enddate,
-        epicID: element.epicID[0].id,
-      });
-
-      var makeKey = element.epicID[0].id;
-      if (!sortDatabaseEpic[makeKey]) {
-        sortDatabaseEpic[makeKey] = [];
-      }
-
-      var epicName = "";
-
-      database.epicResults.forEach((epic) => {
-        if (epic.epicId == makeKey) {
-          epicName = epic.epic;
-        }
-      });
-
-      sortDatabaseEpic[makeKey].push({
-        task: element.task,
-        category: element.category,
-        completed: element.completed,
-        enddate: element.enddate,
-        epic: epicName,
-      });
+    sortDatabaseCategory[makeCatKey].push({
+      task: element.task,
+      category: element.category,
+      completed: element.completed,
+      enddate: element.enddate,
+      epicID: element.epicID[0].id,
     });
 
-    console.log(sortDatabaseCategory);
-    console.log(sortDatabaseEpic);
+    var makeEpicKey = element.epicID[0].id;
+    if (!sortDatabaseEpic[makeEpicKey]) {
+      sortDatabaseEpic[makeEpicKey] = [];
+    }
 
-    const catKeys = Object.keys(sortDatabaseCategory);
-    const epicKeys = Object.keys(sortDatabaseEpic);
+    var epicName = "";
+    var epicColor = "";
+    var bar = false;
+    var pie = false;
 
-    catKeys.forEach((key) => {
-      let items = sortDatabaseCategory[key];
-      var dataUndone = [];
-      var dataCompleted = [];
-      let chartTitleText = key + " Tasks";
-      var completedCount = 0;
-      var totalCount = items.length;
-
-      items.forEach((item) => {
-        if (
-          item.enddate.start >= today ||
-          item.enddate == "2021-08-01T00:00:00.000Z"
-        ) {
-          if (item.completed == true) {
-            completedCount += 1;
-            dataCompleted.push({ x: item.task, value: 1, fill: "#36abd9" });
-          } else {
-            dataUndone.push({
-              x: item.task,
-              value: 1,
-              fill: anychart.color.lighten("#36abd9"),
-            });
-          }
-        }
-      });
-
-      var data = dataUndone.concat(dataCompleted);
-      var value = Math.round((completedCount / totalCount) * 100);
-
-      // makeChart(data, chartTitleText);
-      //   makeBar(value.toString(), chartTitleText);
+    database.epicResults.forEach((epic) => {
+      if (epic.epicId == makeEpicKey) {
+        epicName = epic.epic;
+        bar = epic.bar;
+        pie = epic.pie;
+        epicColor = epic.color;
+      }
     });
 
-    epicKeys.forEach((key) => {
-      let items = sortDatabaseEpic[key];
-      var dataUndone = [];
-      var dataCompleted = [];
-      let chartTitleText = items[0].epic + " Tasks";
-      var completedCount = 0;
-      var totalCount = items.length;
+    sortDatabaseEpic[makeEpicKey].push({
+      task: element.task,
+      category: element.category,
+      completed: element.completed,
+      enddate: element.enddate,
+      epic: epicName,
+      color: epicColor,
+      bar: bar,
+      pie: pie,
+      // I feel like there's a better way to do this display thing but idk what it would be
+    });
+  });
 
-      items.forEach((item) => {
+  console.log(sortDatabaseCategory);
+  console.log(sortDatabaseEpic);
+
+  const catKeys = Object.keys(sortDatabaseCategory);
+  const epicKeys = Object.keys(sortDatabaseEpic);
+
+  console.log(catKeys);
+  console.log(epicKeys);
+
+  catKeys.forEach((key) => {
+    let items = sortDatabaseCategory[key];
+    var dataUndone = [];
+    var dataCompleted = [];
+    let chartTitleText = key + " Tasks";
+    var completedCount = 0;
+    var totalCount = items.length;
+
+    items.forEach((item) => {
+      if (
+        item.enddate.start >= today ||
+        item.enddate == "2021-08-01T00:00:00.000Z"
+      ) {
         if (item.completed == true) {
           completedCount += 1;
           dataCompleted.push({ x: item.task, value: 1, fill: "#36abd9" });
@@ -187,15 +168,49 @@ const doEverything = async () => {
             fill: anychart.color.lighten("#36abd9"),
           });
         }
-      });
-
-      var data = dataUndone.concat(dataCompleted);
-      var value = Math.round((completedCount / totalCount) * 100);
-      if (items.length > 2) {
-        // makeChart(data, chartTitleText);
-        makeBar(value.toString(), chartTitleText);
       }
     });
+
+    var data = dataUndone.concat(dataCompleted);
+    var value = Math.round((completedCount / totalCount) * 100);
+
+    // makeChart(data, chartTitleText);
+    //   makeBar(value.toString(), chartTitleText);
+  });
+
+  epicKeys.forEach((key) => {
+    let items = sortDatabaseEpic[key];
+    var dataUndone = [];
+    var dataCompleted = [];
+    let chartTitleText = items[0].epic + " Tasks";
+    var completedCount = 0;
+    var totalCount = items.length;
+    var color = items[0].color;
+
+    items.forEach((item) => {
+      if (item.completed == true) {
+        completedCount += 1;
+        dataCompleted.push({ x: item.task, value: 1, fill: color });
+      } else {
+        dataUndone.push({
+          x: item.task,
+          value: 1,
+          fill: anychart.color.lighten(color),
+        });
+      }
+    });
+
+    var data = dataUndone.concat(dataCompleted);
+    var value = Math.round((completedCount / totalCount) * 100);
+
+    if (items[0].bar == true) {
+      makeBar(color, value.toString(), chartTitleText);
+    }
+    if (items[0].pie == true) {
+      anychart.onDocumentReady(function () {
+        makeChart(data, chartTitleText);
+      });
+    }
   });
 };
 
