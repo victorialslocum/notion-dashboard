@@ -4,7 +4,7 @@ const barcontainer = document.getElementById("barcontainer");
 const getDataFromBackend = async () => {
   const rest = await fetch("http://localhost:8000/users");
   const data = await rest.json();
-  return data;
+  return data;  
 };
 
 // HOW DOES GITHUB WORK
@@ -177,7 +177,7 @@ const doEverything = async () => {
     var value = Math.round((completedCount / totalCount) * 100);
 
     // makeChart(data, chartTitleText);
-    //   makeBar(value.toString(), chartTitleText);
+    // makeBar(value.toString(), chartTitleText);
   });
 
   epicKeys.forEach((key) => {
