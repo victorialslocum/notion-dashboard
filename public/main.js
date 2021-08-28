@@ -2,7 +2,7 @@ const container = document.getElementById("container");
 const barcontainer = document.getElementById("barcontainer");
 
 const getDataFromBackend = async () => {
-  const rest = await fetch("http://localhost:8000/users");
+  const rest = await fetch("/users");
   const data = await rest.json();
   return data;  
 };
