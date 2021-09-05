@@ -1,6 +1,7 @@
 {
-    "recommendations": [
-        "ronnidc.nunjucks",
-        "irongeek.vscode-env"
-    ]
+  "recommendations": [
+    "irongeek.vscode-env",
+    "eseom.nunjucks-template",
+    "esbenp.prettier-vscode"
+  ]
 }

@@ -70,13 +70,13 @@ app.get("/users", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
-  res.render("pages/landing.nj", { foo: "bar", notion_link });
+  res.render("pages/landing.nj", { foo: "bar" });
 });
 
 app.get("/auth", async (req, res) => {
   if (req.session.access_token) {
     // if the user is already logged in
-    res.redirect("/");
+    res.redirect("/settings");
     return;
   }
 
