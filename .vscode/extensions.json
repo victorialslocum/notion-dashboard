@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "ronnidc.nunjucks"
+        "ronnidc.nunjucks",
+        "irongeek.vscode-env"
     ]
 }
