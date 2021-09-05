@@ -36,8 +36,16 @@
 ## firebase db structure
 
 - users:
+
   - notion access token stuff
 
 - pages
 
-    -
+  -
+
+## css framework
+
+- bulma
+- icon font: coreui/icons
+  - i'm only using the "brand" icons: `brand.min.css`
+    - to add more, copy another link from the [CDN](https://www.jsdelivr.com/package/npm/@coreui/icons?path=css)

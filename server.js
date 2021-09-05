@@ -73,6 +73,10 @@ app.get("/", async (req, res) => {
   res.render("pages/landing.nj", { foo: "bar" });
 });
 
+app.get("/onboarding", async (req, res) => {
+  res.render("pages/onboarding.nj", { foo: "bar" });
+});
+
 app.get("/auth", async (req, res) => {
   if (req.session.access_token) {
     // if the user is already logged in
