@@ -120,8 +120,8 @@
               <span class="tag is-warning">WIP</span>
             </h2>
             <p>
-              Create Notion pages to capture messages from specific Slack
-              channels, even with support for threads.
+              Create Notion pages from messages in specific Slack channels, even
+              with support for threads.
             </p>
             <br />
             <a href="#"
