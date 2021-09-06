@@ -4,14 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Notion Dashboards</title>
-    <!-- TODO: Install these with npm -->
+    <!-- TODO: Install these with npm instead -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@coreui/icons@2.0.1/css/brand.min.css"
+      href="https://cdn.jsdelivr.net/npm/@coreui/icons@2.0.1/css/all.min.css"
     />
     <link
       rel="stylesheet"
@@ -98,7 +98,12 @@
               grab data from the pages and categories you set up in Notion!
             </p>
             <br />
-            <a href="#">Read how Victoria uses this to track her stuff</a> or
+            <a
+              href="https://www.amici.ai/post/a-notion-slack-integration-for-standups-pt-1"
+              ><i class="cil-newspaper"></i> Read how Victoria uses this to
+              track her stuff</a
+            >
+            or
             <a class="tag is-info" href="/onboarding">do it yourself</a>
           </div>
           <div class="column">
@@ -124,8 +129,11 @@
               with support for threads.
             </p>
             <br />
-            <a href="#"
-              >Read how Amici uses Slack + Notion for async standups</a
+            <a
+              href="https://www.amici.ai/post/a-notion-slack-integration-for-standups-pt-1"
+              target="_blank"
+              ><i class="cil-newspaper"></i> Read how Amici uses Slack + Notion
+              for async standups</a
             >
           </div>
         </div>
