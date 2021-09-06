@@ -4,14 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Notion Dashboards</title>
-    <!-- TODO: Install these with npm -->
+    <!-- TODO: Install these with npm instead -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@coreui/icons@2.0.1/css/brand.min.css"
+      href="https://cdn.jsdelivr.net/npm/@coreui/icons@2.0.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-divider@1.1.0/dist/bulma-divider.min.css"
     />
   </head>
   <body>
@@ -19,15 +23,15 @@
       <!-- Hero head: will stick at the top -->
       <div class="hero-head">
         <nav class="navbar mt-2">
-          <div class="container">
-            <div class="navbar-brand">
-              <a href="/" class="navbar-item">< Go back </a>
-              <span class="navbar-burger" data-target="navbarMenuHeroA">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
+          <div class="navbar-brand">
+            <a href="/" class="navbar-item"
+              ><i class="cil-chevron-left"></i>&nbsp; Go back
+            </a>
+            <span class="navbar-burger" data-target="navbarMenuHeroA">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
           </div>
         </nav>
       </div>
@@ -61,11 +65,15 @@
         <div class="columns is-vcentered">
           <div class="column pl-4 ml-4 has-text-left">
             <h2 class="title is-3">
-              Use our template <span class="tag is-primary">Quick</span>
+              Use our Notion template
+              <span class="tag is-warning"
+                >Quick&nbsp;<i class="cil-bolt"></i>
+              </span>
             </h2>
             <p>
-              Use our API and integrations to display Notion data and track
-              performance over time in two simple steps:
+              The template includes a tasks database and a goals database.
+              Includes all of the fields necessary for dashboards. Customize to
+              your liking.
             </p>
             <div class="content">
               <ul>
@@ -87,6 +95,8 @@
         </div>
       </section>
 
+      <div class="divider">or</div>
+
       <section id="showcase" class="mt-4">
         <div class="columns is-vcentered">
           <div class="column">
@@ -94,15 +104,21 @@
           </div>
           <div class="column ml-4 mr-4 has-text-left">
             <h2 class="title is-3">
-              Use an existing tasks list
+              Use existing Notion page(s)
               <span class="tag is-light">Coming soon</span>
             </h2>
             <p>
-              Use our API and integrations to display Notion data and track
-              performance over time
+              Connect your page list in Notion and match the fields. This
+              feature will be flexible and support
             </p>
-            <br />
-            <a href="#">Read how AcmeCo uses this to track their shit</a>
+            <div class="content">
+              <ul>
+                <li>custom names</li>
+                <li>custom fields</li>
+                <li>custom page hierarchy</li>
+                <li>custom relations</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
