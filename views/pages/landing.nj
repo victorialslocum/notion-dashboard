@@ -13,6 +13,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@coreui/icons@2.0.1/css/brand.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-divider@1.1.0/dist/bulma-divider.min.css"
+    />
   </head>
   <body>
     <section class="hero is-info is-medium">
@@ -36,6 +40,16 @@
             <div id="navbarMenuHeroA" class="navbar-menu">
               <div class="navbar-end">
                 <span class="navbar-item">
+                  <span class="is-white"
+                    >Free and
+                    <a
+                      href="https://github.com/victoriaslocum752/notion-dashboard"
+                      target="_blank"
+                      >open source</a
+                    ></span
+                  >
+                </span>
+                <span class="navbar-item">
                   <a class="button is-black is-inverted" href="/onboarding">
                     <span class="icon">
                       <i class="cib-notion"></i>
@@ -53,9 +67,7 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <p class="title is-1">Notion Dashboards</p>
-          <p class="subtitle">
-            Turn your Notion tasks list into beautiful dashboards 📊
-          </p>
+          <p class="subtitle">Get beautiful dashboards for your Notion tasks</p>
         </div>
       </div>
 
@@ -75,42 +87,93 @@
         </nav>
       </div> -->
     </section>
+    <div class="container">
+      <section id="showcase" class="mt-4">
+        <div class="columns is-vcentered">
+          <div class="column pl-4 ml-4 has-text-left">
+            <h2 class="title is-3">Follow your tasks & goals</h2>
+            <p>
+              Notion is great for to-do lists and task tracking, but it's hard
+              to zoom out sometimes and see your progress. These dashboards grab
+              all data from the pages and categories you set up in Notion!
+            </p>
+            <br />
+            <a href="#">Read how Victoria uses this to track her stuff</a> or
+            <a class="tag is-info" href="/onboarding">do it yourself</a>
+          </div>
+          <div class="column">
+            <img class="pt-4" src="/img/screenshot1.png" />
+          </div>
+        </div>
+      </section>
 
-    <section id="showcase" class="mt-4">
-      <div class="columns is-vcentered">
-        <div class="column pl-4 ml-4 has-text-left">
-          <h2 class="title is-3">Track your goals</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-            semper, lectus sed venenatis dignissim, lacus sapien ultricies enim,
-            nec posuere elit urna sed libero. Nam a est eget massa blandit
-            volutpat. Nunc accumsan at eros et vulputate. Sed cursus laoreet
-            diam, vitae ultricies libero gravida vel.
-          </p>
-          <br />
-          <a href="#">Read how Victoria uses this to track her shit</a>
-        </div>
-        <div class="column">
-          <img class="pt-4" src="/img/screenshot1.png" />
-        </div>
-      </div>
-    </section>
+      <div class="divider">Other experiments</div>
 
-    <section id="showcase" class="mt-4">
-      <div class="columns is-vcentered">
-        <div class="column">
-          <img class="pt-4" src="/img/screenshot1.png" />
+      <section id="showcase" class="mt-4">
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img class="pt-4" src="/img/standup.png" />
+          </div>
+          <div class="column ml-4 mr-4 has-text-left">
+            <h2 class="title is-3">
+              Capture Slack messages
+              <span class="tag is-warning">Private beta</span>
+            </h2>
+            <p>
+              Create Notion pages to capture messages from specific Slack
+              channels, even with support for threads.
+            </p>
+            <br />
+            <a href="#"
+              >Read how Amici uses Slack + Notion for async standups</a
+            >
+          </div>
         </div>
-        <div class="column ml-4 mr-4 has-text-left">
-          <h2 class="title is-3">Your Notion pages are data</h2>
-          <p>
-            Use our API and integrations to display Notion data and track
-            performance over time
-          </p>
-          <br />
-          <a href="#">Read how AcmeCo uses this to track their shit</a>
+      </section>
+
+      <section id="showcase" class="mt-4">
+        <div class="columns is-vcentered">
+          <div class="column pl-4 ml-4 has-text-left">
+            <h2 class="title is-3">
+              Custom reports & API
+              <span class="tag is-light">Coming soon</span>
+            </h2>
+            <p>
+              Quickly connect your Notion pages to your apps or reports with our
+              API layer. Grab the status of your tasks, or even progression over
+              time. ex:
+            </p>
+            <pre class="has-background-black has-text-white is-dark mt-3">
+54% of "proposals" have the status "draft"</pre
+            >
+          </div>
+          <div class="column">
+            <img class="pt-4" src="/img/screenshot1.png" />
+          </div>
         </div>
+      </section>
+    </div>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <br />
+        <p>
+          Built by
+          <a
+            class="has-text-weight-semibold"
+            target="_blank"
+            href="https://victoriaslocum.com"
+            >Victoria Slocum</a
+          >
+          and
+          <a
+            class="has-text-weight-semibold"
+            target="_blank"
+            href="https://bpmct.net"
+            >Ben Potter</a
+          >
+          because it was kinda useful and very fun.
+        </p>
       </div>
-    </section>
+    </footer>
   </body>
 </html>

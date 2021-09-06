@@ -15,7 +15,7 @@
     />
   </head>
   <body>
-    <section class="hero is-info is-small">
+    <section class="hero is-warning is-small">
       <!-- Hero head: will stick at the top -->
       <div class="hero-head">
         <nav class="navbar mt-2">
@@ -56,54 +56,56 @@
       </div> -->
     </section>
 
-    <section id="showcase" class="mt-4">
-      <div class="columns is-vcentered">
-        <div class="column pl-4 ml-4 has-text-left">
-          <h2 class="title is-3">
-            Use our template <span class="tag is-primary">Quick</span>
-          </h2>
-          <p>
-            Use our API and integrations to display Notion data and track
-            performance over time in two simple steps:
-          </p>
-          <div class="content">
-            <ul>
-              <li>
-                First,
-                <a
-                  href="https://spangled-mars-1b8.notion.site/Templates-1983c02eddbf4c8da790c94caaa01c2f"
-                  target="_blank"
-                  >copy template to your Notion</a
-                >
-              </li>
-              <li>Then, <a href="/auth">link your Notion account</a></li>
-            </ul>
+    <div class="container">
+      <section id="showcase" class="mt-4">
+        <div class="columns is-vcentered">
+          <div class="column pl-4 ml-4 has-text-left">
+            <h2 class="title is-3">
+              Use our template <span class="tag is-primary">Quick</span>
+            </h2>
+            <p>
+              Use our API and integrations to display Notion data and track
+              performance over time in two simple steps:
+            </p>
+            <div class="content">
+              <ul>
+                <li>
+                  First,
+                  <a
+                    href="https://spangled-mars-1b8.notion.site/Templates-1983c02eddbf4c8da790c94caaa01c2f"
+                    target="_blank"
+                    >copy template to your Notion</a
+                  >
+                </li>
+                <li>Then, <a href="/auth">link your Notion account</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="column">
+            <img class="pt-4" src="/img/t2.png" />
           </div>
         </div>
-        <div class="column">
-          <img class="pt-4" src="/img/t2.png" />
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="showcase" class="mt-4">
-      <div class="columns is-vcentered">
-        <div class="column">
-          <img class="pt-4" src="/img/screenshot1.png" />
+      <section id="showcase" class="mt-4">
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img class="pt-4" src="/img/screenshot1.png" />
+          </div>
+          <div class="column ml-4 mr-4 has-text-left">
+            <h2 class="title is-3">
+              Use an existing tasks list
+              <span class="tag is-light">Coming soon</span>
+            </h2>
+            <p>
+              Use our API and integrations to display Notion data and track
+              performance over time
+            </p>
+            <br />
+            <a href="#">Read how AcmeCo uses this to track their shit</a>
+          </div>
         </div>
-        <div class="column ml-4 mr-4 has-text-left">
-          <h2 class="title is-3">
-            Use an existing tasks list
-            <span class="tag is-light">Coming soon</span>
-          </h2>
-          <p>
-            Use our API and integrations to display Notion data and track
-            performance over time
-          </p>
-          <br />
-          <a href="#">Read how AcmeCo uses this to track their shit</a>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </body>
 </html>
