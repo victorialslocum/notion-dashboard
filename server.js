@@ -25,6 +25,10 @@ admin.initializeApp({
 
 let database = admin.database();
 
+const { Client } = require("@notionhq/client");
+const notion = new Client();
+
+// this line initializes the Notion Client using our key
 // user module (get token and data)
 
 // our function
@@ -59,6 +63,32 @@ app.use(
   })
 );
 
+// middleware to see if the user is logged in and add their user data to the req
+var getUser = async (req, res, next) => {
+  if (req.session.access_token) {
+    // look up the user in firebase
+    const ref = database.ref(`/users/${req.session.access_token}`);
+    const response = await ref.once("value");
+    const user = response.val();
+
+    if (user) {
+      req.user = user;
+    } else {
+      // user is not in firebase
+
+      // remove the invalid access token
+      req.session.access_token = null;
+    }
+  } else {
+    req.user = null;
+  }
+
+  // basically, all routes will get a req.user property now
+  next();
+};
+
+app.use(getUser);
+
 nunjucks.configure("views", {
   autoescape: true,
   express: app,
@@ -70,26 +100,108 @@ app.get("/users", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
-  res.render("pages/landing.nj", { foo: "bar" });
+  res.render("pages/landing.nj", { loggedIn: req.user ? true : false });
 });
 
 app.get("/onboarding", async (req, res) => {
   res.render("pages/onboarding.nj", { foo: "bar" });
 });
 
+app.get("/settings", async (req, res) => {
+  // grab list of notion pages
+
+  // logged in users only
+  if (!req.user) {
+    res.redirect("/");
+    return;
+  }
+
+  // will contain list of databases found//////
+  let databases = [];
+  // may contain guesses for what the tasks and goals db is
+  let tasksGuess,
+    goalsGuess = "";
+
+  try {
+    const queryDatabases = await notion.search({
+      query: "",
+      filter: { property: "object", value: "database" },
+      auth: req.user.notionData.access_token,
+    });
+
+    const databasesFound = queryDatabases.results;
+
+    // if (databasesFound.length < 2) {
+    //   // log out the user
+    //   req.session.access_token = null;
+
+    //   throw new Error(
+    //     `You need at least two databases in the pages you added. Only found ${databasesFound.length}<br /><br /><a href="/auth">Log in again</a>`
+    //   );
+    // }
+
+    // console.log(databasesFound[0].title);
+
+    // map these databases into a prettier array
+    databases = databasesFound.map((db) => {
+      return {
+        id: db.id,
+        // display the emoji, if exists. if picture or blank, show nothing
+        emoji: db.icon && db.icon.type == "emoji" ? db.icon.emoji : "",
+        // name if the database
+        name: db.title[0] ? db.title[0].plain_text : "unknown title",
+      };
+    });
+
+    // console.log(databases);
+
+    // make some guesses into what the tasks and goals database is
+    tasksGuess = databases.find(
+      (db) =>
+        db.name.toLowerCase().includes("to-do") ||
+        db.name.toLowerCase().includes("task") ||
+        db.name.toLowerCase().includes("todo")
+    );
+    goalsGuess = databases.find(
+      (db) =>
+        db.name.toLowerCase().includes("epic") ||
+        db.name.toLowerCase().includes("goal")
+    );
+    console.log(tasksGuess);
+    console.log("goals guess is", goalsGuess);
+  } catch (error) {
+    // TODO: use error handling within the template, not a white page
+    res.send(error.toString());
+    console.log("error", error);
+    return;
+  }
+
+  // my code sucks
+  res.render("pages/settings.nj", {
+    databases,
+    // return the database ID if our guess found a result
+    tasksGuessId: tasksGuess ? tasksGuess.id : "",
+    goalsGuessId: goalsGuess ? goalsGuess.id : "",
+  });
+});
+
 app.get("/auth", async (req, res) => {
-  if (req.session.access_token) {
-    // if the user is already logged in
+  if (req.user) {
+    res.redirect("/dashboard");
+  } else {
+    const notion_link = `https://api.notion.com/v1/oauth/authorize?client_id=${process.env.NOTION_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code`;
+    res.redirect(notion_link);
+  }
+});
+
+app.get("/dashboard", async (req, res) => {
+  if (!req.user.pages) {
+    // if they don't have any pages added, take them to the config page
     res.redirect("/settings");
     return;
   }
 
-  // generate the "log in with Notion link"
-  // docs: https://developers.notion.com/docs/authorization#prompting-users-to-add-an-integration
-
-  const notion_link = `https://api.notion.com/v1/oauth/authorize?client_id=${process.env.NOTION_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code`;
-
-  res.render("pages/auth.nj", { foo: "bar", notion_link });
+  res.send("coming soon");
 });
 
 app.get("/auth_callback", async (req, res) => {
@@ -129,6 +241,8 @@ app.get("/auth_callback", async (req, res) => {
       await ref.set({ notionData: userData, dashboardPages: [] });
     }
 
+    console.log(userData.access_token);
+
     // set a cookie with their access token so they don't need to log in again
     req.session.access_token = userData.access_token;
   } catch (err) {
@@ -137,8 +251,7 @@ app.get("/auth_callback", async (req, res) => {
     return;
   }
 
-  // take them to the settings page
-  res.redirect("/settings");
+  res.redirect("/dashboard");
 });
 
 app.listen(port, console.log(`Server started on ${port}`));

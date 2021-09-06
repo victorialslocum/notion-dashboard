@@ -50,12 +50,21 @@
                   >
                 </span>
                 <span class="navbar-item">
+                  {% if loggedIn %}
+                  <a class="button is-black is-inverted" href="/dashboard">
+                    <span class="icon">
+                      <i class="cil-bar-chart"></i>
+                    </span>
+                    <span> Go to dashboard</span>
+                  </a>
+                  {% else %}
                   <a class="button is-black is-inverted" href="/onboarding">
                     <span class="icon">
                       <i class="cib-notion"></i>
                     </span>
                     <span> Link your Notion</span>
                   </a>
+                  {% endif %}
                 </span>
               </div>
             </div>

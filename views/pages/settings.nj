@@ -1,0 +1,59 @@
+{% set title = "⚙️ Dashboard settings" %} {% set color = "success" %} {% extends
+"../parent.nj" %} {% block content %}
+  <div class="container">
+    <div class="columns mt-6 mb-6">
+      <div class="column">
+        <div class="block ml-4 mr-4">
+          <div class="field">
+            <label for="goals" class="label is-medium">Goals page</label>
+            <div class="select is-medium {{ "is-success" if (goalsGuessId) else null }}">
+              <select id="goals" name="goals">
+                {% for database in databases %}
+                    <option 
+                        value="{{ database.id }}"
+                        {{ "selected" if (database.id == goalsGuessId) else null }}
+                    >
+                        {{ database.emoji }} {{ database.name }}
+                    </option>
+                {% else %}
+                    <option>No databases found...</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="tasks" class="label is-medium">Tasks page</label>
+            <div class="select is-medium {{ "is-success" if (tasksGuessId) else null }}">
+              <select id="tasks" name="tasks">
+                {% for database in databases %}
+                    <option 
+                        value="{{ database.id }}"
+                        {{ "selected" if (database.id == tasksGuessId) else null }}
+                    >
+                        {{ database.emoji }} {{ database.name }}
+                    </option>
+                {% else %}
+                    <option>No databases found...</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+            {% if tasksGuessId and goalsGuessId %}
+            <p class="is-medium mb-4">
+                Since you're using a template, the defaults are probably fine.
+            </p>
+            {% endif %}
+
+          <div class="field is-grouped mb-6">
+            <div class="control">
+              <button class="button is-link is-large">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider is-vertical">and</div>
+      <div class="column"></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

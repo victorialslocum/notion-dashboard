@@ -1,127 +1,65 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Notion Dashboards</title>
-    <!-- TODO: Install these with npm instead -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@coreui/icons@2.0.1/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-divider@1.1.0/dist/bulma-divider.min.css"
-    />
-  </head>
-  <body>
-    <section class="hero is-warning is-small">
-      <!-- Hero head: will stick at the top -->
-      <div class="hero-head">
-        <nav class="navbar mt-2">
-          <div class="navbar-brand">
-            <a href="/" class="navbar-item"
-              ><i class="cil-chevron-left"></i>&nbsp; Go back
-            </a>
-            <span class="navbar-burger" data-target="navbarMenuHeroA">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </div>
-        </nav>
-      </div>
-
-      <!-- Hero content: will be in the middle -->
-      <div class="hero-body">
-        <div class="container has-text-centered pb-2">
-          <p class="title is-2">Getting started</p>
+{% set title = "Getting started" %} {% extends "../parent.nj" %} {% block
+content %}
+<div class="container">
+  <section id="showcase" class="mt-4">
+    <div class="columns is-vcentered">
+      <div class="column pl-4 ml-4 has-text-left">
+        <h2 class="title is-3">
+          Use our Notion template
+          <span class="tag is-warning"
+            >Quick&nbsp;<i class="cil-bolt"></i>
+          </span>
+        </h2>
+        <p>
+          The template includes a tasks database and a goals database. Includes
+          all of the fields necessary for dashboards, customize to your liking.
+        </p>
+        <div class="content">
+          <ul>
+            <li>
+              First,
+              <a
+                href="https://spangled-mars-1b8.notion.site/Templates-1983c02eddbf4c8da790c94caaa01c2f"
+                target="_blank"
+                >duplicate the template to your Notion</a
+              >
+            </li>
+            <li>Then, <a href="/auth">connect your Notion account</a></li>
+          </ul>
         </div>
       </div>
-
-      <!-- Hero footer: will stick at the bottom -->
-      <!-- <div class="hero-foot">
-        <nav class="tabs">
-          <div class="container">
-            <ul>
-              <li class="is-active"><a>Overview</a></li>
-              <li><a>Modifiers</a></li>
-              <li><a>Grid</a></li>
-              <li><a>Elements</a></li>
-              <li><a>Components</a></li>
-              <li><a>Layout</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div> -->
-    </section>
-
-    <div class="container">
-      <section id="showcase" class="mt-4">
-        <div class="columns is-vcentered">
-          <div class="column pl-4 ml-4 has-text-left">
-            <h2 class="title is-3">
-              Use our Notion template
-              <span class="tag is-warning"
-                >Quick&nbsp;<i class="cil-bolt"></i>
-              </span>
-            </h2>
-            <p>
-              The template includes a tasks database and a goals database.
-              Includes all of the fields necessary for dashboards. Customize to
-              your liking.
-            </p>
-            <div class="content">
-              <ul>
-                <li>
-                  First,
-                  <a
-                    href="https://spangled-mars-1b8.notion.site/Templates-1983c02eddbf4c8da790c94caaa01c2f"
-                    target="_blank"
-                    >copy template to your Notion</a
-                  >
-                </li>
-                <li>Then, <a href="/auth">link your Notion account</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="column">
-            <img class="pt-4" src="/img/t2.png" />
-          </div>
-        </div>
-      </section>
-
-      <div class="divider">or</div>
-
-      <section id="showcase" class="mt-4">
-        <div class="columns is-vcentered">
-          <div class="column">
-            <img class="pt-4" src="/img/screenshot1.png" />
-          </div>
-          <div class="column ml-4 mr-4 has-text-left">
-            <h2 class="title is-3">
-              Use existing Notion page(s)
-              <span class="tag is-light">Coming soon</span>
-            </h2>
-            <p>
-              Connect your page list in Notion and match the fields. This
-              feature will be flexible and support
-            </p>
-            <div class="content">
-              <ul>
-                <li>custom names</li>
-                <li>custom fields</li>
-                <li>custom page hierarchy</li>
-                <li>custom relations</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div class="column">
+        <img class="pt-4" src="/img/t2.png" />
+      </div>
     </div>
-  </body>
-</html>
+  </section>
+
+  <div class="divider">or</div>
+
+  <section id="showcase" class="mt-4">
+    <div class="columns is-vcentered">
+      <div class="column">
+        <img class="pt-4" src="/img/screenshot1.png" />
+      </div>
+      <div class="column ml-4 mr-4 has-text-left">
+        <h2 class="title is-3">
+          Use existing Notion page(s)
+          <span class="tag is-light">Coming soon</span>
+        </h2>
+        <p>
+          Connect your page list in Notion and match the fields. This feature
+          will be flexible and support
+        </p>
+        <div class="content">
+          <ul>
+            <li>custom names</li>
+            <li>custom fields</li>
+            <li>custom page hierarchy</li>
+            <li>custom relations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
