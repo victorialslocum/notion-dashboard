@@ -129,6 +129,8 @@ app.get("/settings", async (req, res) => {
       auth: req.user.notionData.access_token,
     });
 
+    console.log(req.user.notionData.access_token);
+
     const databasesFound = queryDatabases.results;
 
     // if (databasesFound.length < 2) {
@@ -167,8 +169,6 @@ app.get("/settings", async (req, res) => {
         db.name.toLowerCase().includes("epic") ||
         db.name.toLowerCase().includes("goal")
     );
-    console.log(tasksGuess);
-    console.log("goals guess is", goalsGuess);
   } catch (error) {
     // TODO: use error handling within the template, not a white page
     res.send(error.toString());
@@ -176,7 +176,6 @@ app.get("/settings", async (req, res) => {
     return;
   }
 
-  // my code sucks
   res.render("pages/settings.nj", {
     databases,
     // return the database ID if our guess found a result
@@ -192,6 +191,11 @@ app.get("/auth", async (req, res) => {
     const notion_link = `https://api.notion.com/v1/oauth/authorize?client_id=${process.env.NOTION_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code`;
     res.redirect(notion_link);
   }
+});
+
+app.get("/logout", async (req, res) => {
+  req.session.access_token = null;
+  res.redirect("/auth");
 });
 
 app.get("/dashboard", async (req, res) => {
@@ -228,6 +232,8 @@ app.get("/auth_callback", async (req, res) => {
   });
 
   let userData = await access_token.json();
+
+  console.log("we now know", userData.access_token);
 
   // add this user to database, if it doesn't exist
   try {
