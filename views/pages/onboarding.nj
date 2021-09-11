@@ -1,0 +1,65 @@
+{% set title = "Getting started" %} {% extends "../parent.nj" %} {% block
+content %}
+<div class="container">
+  <section id="showcase" class="mt-4">
+    <div class="columns is-vcentered">
+      <div class="column pl-4 ml-4 has-text-left">
+        <h2 class="title is-3">
+          Use our Notion template
+          <span class="tag is-warning"
+            >Quick&nbsp;<i class="cil-bolt"></i>
+          </span>
+        </h2>
+        <p>
+          The template includes a tasks database and a goals database. Includes
+          all of the fields necessary for dashboards, customize to your liking.
+        </p>
+        <div class="content">
+          <ul>
+            <li>
+              First,
+              <a
+                href="https://spangled-mars-1b8.notion.site/Templates-1983c02eddbf4c8da790c94caaa01c2f"
+                target="_blank"
+                >duplicate the template to your Notion</a
+              >
+            </li>
+            <li>Then, <a href="/auth">connect your Notion account</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="column">
+        <img class="pt-4" src="/img/t2.png" />
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">or</div>
+
+  <section id="showcase" class="mt-4">
+    <div class="columns is-vcentered">
+      <div class="column">
+        <img class="pt-4" src="/img/screenshot1.png" />
+      </div>
+      <div class="column ml-4 mr-4 has-text-left">
+        <h2 class="title is-3">
+          Use existing Notion page(s)
+          <span class="tag is-light">Coming soon</span>
+        </h2>
+        <p>
+          Connect your page list in Notion and match the fields. This feature
+          will be flexible and support
+        </p>
+        <div class="content">
+          <ul>
+            <li>custom names</li>
+            <li>custom fields</li>
+            <li>custom page hierarchy</li>
+            <li>custom relations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

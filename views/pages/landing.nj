@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notion Dashboards</title>
+    <!-- TODO: Install these with npm instead -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@coreui/icons@2.0.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-divider@1.1.0/dist/bulma-divider.min.css"
+    />
+  </head>
+  <body>
+    <section class="hero is-info is-medium">
+      <!-- Hero head: will stick at the top -->
+      <div class="hero-head">
+        <nav class="navbar mt-2">
+          <div class="container">
+            <!-- <div class="navbar-brand">
+              <a class="navbar-item">
+                <img
+                  src="https://bulma.io/images/bulma-type-white.png"
+                  alt="Logo"
+                />
+              </a>
+              <span class="navbar-burger" data-target="navbarMenuHeroA">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div> -->
+            <div id="navbarMenuHeroA" class="navbar-menu">
+              <div class="navbar-end">
+                <span class="navbar-item">
+                  <span class="is-white"
+                    >100% free and
+                    <a
+                      href="https://github.com/victoriaslocum752/notion-dashboard"
+                      target="_blank"
+                      >open source</a
+                    ></span
+                  >
+                </span>
+                <span class="navbar-item">
+                  {% if loggedIn %}
+                  <a class="button is-black is-inverted" href="/dashboard">
+                    <span class="icon">
+                      <i class="cil-bar-chart"></i>
+                    </span>
+                    <span> Go to dashboard</span>
+                  </a>
+                  {% else %}
+                  <a class="button is-black is-inverted" href="/onboarding">
+                    <span class="icon">
+                      <i class="cib-notion"></i>
+                    </span>
+                    <span> Link your Notion</span>
+                  </a>
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <p class="title is-1">Notion Dashboards</p>
+          <p class="subtitle">Get beautiful dashboards for your Notion tasks</p>
+        </div>
+      </div>
+
+      <!-- Hero footer: will stick at the bottom -->
+      <!-- <div class="hero-foot">
+        <nav class="tabs">
+          <div class="container">
+            <ul>
+              <li class="is-active"><a>Overview</a></li>
+              <li><a>Modifiers</a></li>
+              <li><a>Grid</a></li>
+              <li><a>Elements</a></li>
+              <li><a>Components</a></li>
+              <li><a>Layout</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div> -->
+    </section>
+    <div class="container">
+      <section id="showcase" class="mt-4">
+        <div class="columns is-vcentered">
+          <div class="column pl-4 ml-4 has-text-left">
+            <h2 class="title is-3">Follow your tasks & goals</h2>
+            <p>
+              Notion is great for to-do lists and task tracking, but it's hard
+              to zoom out sometimes and see your progress. These dashboards only
+              grab data from the pages and categories you set up in Notion!
+            </p>
+            <br />
+            <a
+              href="https://www.amici.ai/post/a-notion-slack-integration-for-standups-pt-1"
+              ><i class="cil-newspaper"></i> Read how Victoria uses this to
+              track her stuff</a
+            >
+            or
+            <a class="tag is-info" href="/onboarding">do it yourself</a>
+          </div>
+          <div class="column">
+            <img class="pt-4" src="/img/screenshot1.png" />
+          </div>
+        </div>
+      </section>
+
+      <div class="divider">Other experiments</div>
+
+      <section id="showcase" class="mt-4">
+        <div class="columns is-vcentered">
+          <div class="column">
+            <img class="pt-4" src="/img/standup.png" />
+          </div>
+          <div class="column ml-4 mr-4 has-text-left">
+            <h2 class="title is-3">
+              Capture Slack messages
+              <span class="tag is-warning">WIP</span>
+            </h2>
+            <p>
+              Create Notion pages from messages in specific Slack channels, even
+              with support for threads.
+            </p>
+            <br />
+            <a
+              href="https://www.amici.ai/post/a-notion-slack-integration-for-standups-pt-1"
+              target="_blank"
+              ><i class="cil-newspaper"></i> Read how Amici uses Slack + Notion
+              for async standups</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="showcase" class="mt-4">
+        <div class="columns is-vcentered">
+          <div class="column pl-4 ml-4 has-text-left">
+            <h2 class="title is-3">
+              Custom reports & API
+              <span class="tag is-light">on deck</span>
+            </h2>
+            <p>
+              Quickly connect your Notion pages to your own apps or reports with
+              this API layer. Grab the status of your tasks, or even progression
+              over time. ex:
+            </p>
+            <pre class="has-background-black has-text-white is-dark mt-3">
+54% of "proposals" have the status "draft"</pre
+            >
+          </div>
+          <div class="column">
+            <img class="pt-4" src="/img/screenshot1.png" />
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <br />
+        <p>
+          Built by
+          <a
+            class="has-text-weight-semibold"
+            target="_blank"
+            href="https://victoriaslocum.com"
+            >Victoria Slocum</a
+          >
+          and
+          <a
+            class="has-text-weight-semibold"
+            target="_blank"
+            href="https://bpmct.net"
+            >Ben Potter</a
+          >
+          because it was kinda useful and very fun.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -2,19 +2,10 @@ const container = document.getElementById("container");
 const barcontainer = document.getElementById("barcontainer");
 
 const getDataFromBackend = async () => {
-  const rest = await fetch("/users");
+  const rest = await fetch("/notion_data");
   const data = await rest.json();
-  return data;  
+  return data;
 };
-
-// HOW DOES GITHUB WORK
-
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, "0");
-var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-var yyyy = today.getFullYear();
-
-today = yyyy + "-" + mm + "-" + dd;
 
 const makeChart = (data, chartTitleText) => {
   var chart = anychart.pie();
@@ -93,19 +84,6 @@ const doEverything = async () => {
   var sortDatabaseEpic = [];
 
   database.taskResults.forEach((element) => {
-    var makeCatKey = element.category;
-    if (!sortDatabaseCategory[makeCatKey]) {
-      sortDatabaseCategory[makeCatKey] = [];
-    }
-
-    sortDatabaseCategory[makeCatKey].push({
-      task: element.task,
-      category: element.category,
-      completed: element.completed,
-      enddate: element.enddate,
-      epicID: element.epicID[0].id,
-    });
-
     var makeEpicKey = element.epicID[0].id;
     if (!sortDatabaseEpic[makeEpicKey]) {
       sortDatabaseEpic[makeEpicKey] = [];
@@ -134,51 +112,10 @@ const doEverything = async () => {
       color: epicColor,
       bar: bar,
       pie: pie,
-      // I feel like there's a better way to do this display thing but idk what it would be
     });
   });
 
-  console.log(sortDatabaseCategory);
-  console.log(sortDatabaseEpic);
-
-  const catKeys = Object.keys(sortDatabaseCategory);
   const epicKeys = Object.keys(sortDatabaseEpic);
-
-  console.log(catKeys);
-  console.log(epicKeys);
-
-  catKeys.forEach((key) => {
-    let items = sortDatabaseCategory[key];
-    var dataUndone = [];
-    var dataCompleted = [];
-    let chartTitleText = key + " Tasks";
-    var completedCount = 0;
-    var totalCount = items.length;
-
-    items.forEach((item) => {
-      if (
-        item.enddate.start >= today ||
-        item.enddate == "2021-08-01T00:00:00.000Z"
-      ) {
-        if (item.completed == true) {
-          completedCount += 1;
-          dataCompleted.push({ x: item.task, value: 1, fill: "#36abd9" });
-        } else {
-          dataUndone.push({
-            x: item.task,
-            value: 1,
-            fill: anychart.color.lighten("#36abd9"),
-          });
-        }
-      }
-    });
-
-    var data = dataUndone.concat(dataCompleted);
-    var value = Math.round((completedCount / totalCount) * 100);
-
-    // makeChart(data, chartTitleText);
-    // makeBar(value.toString(), chartTitleText);
-  });
 
   epicKeys.forEach((key) => {
     let items = sortDatabaseEpic[key];

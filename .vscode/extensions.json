@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "irongeek.vscode-env",
+    "eseom.nunjucks-template",
+    "esbenp.prettier-vscode"
+  ]
+}
