@@ -63,6 +63,14 @@ app.use(
   })
 );
 
+// bodyParser middleware to get POST data
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
 // middleware to see if the user is logged in and add their user data to the req
 var getUser = async (req, res, next) => {
   if (req.session.access_token) {
@@ -100,6 +108,8 @@ app.get("/notion_data", async (req, res) => {
     epics_db_id = "";
   if (req.user) {
     // use the user's API token :)
+    // epics_db_id = "";
+    // tasks_db_id = "";
     notion_token = req.user.notionData.access_token;
   } else {
     // use victoria's API and pages
@@ -195,6 +205,11 @@ app.get("/settings", async (req, res) => {
     tasksGuessId: tasksGuess ? tasksGuess.id : "",
     goalsGuessId: goalsGuess ? goalsGuess.id : "",
   });
+});
+
+app.post("/save_settings", async (req, res) => {
+  console.log(req.body);
+  res.send("tehehehehe");
 });
 
 app.get("/auth", async (req, res) => {
