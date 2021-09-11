@@ -86,9 +86,9 @@ var getUser = async (req, res, next) => {
   // basically, all routes will get a req.user property now
   next();
 };
-
 app.use(getUser);
 
+// app.use(nunjucks)
 nunjucks.configure("views", {
   autoescape: true,
   express: app,
@@ -186,8 +186,10 @@ app.get("/settings", async (req, res) => {
 
 app.get("/auth", async (req, res) => {
   if (req.user) {
+    // they're logged in
     res.redirect("/dashboard");
   } else {
+    // redirect them to notion (pass the callback URI)
     const notion_link = `https://api.notion.com/v1/oauth/authorize?client_id=${process.env.NOTION_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code`;
     res.redirect(notion_link);
   }
@@ -232,8 +234,6 @@ app.get("/auth_callback", async (req, res) => {
   });
 
   let userData = await access_token.json();
-
-  console.log("we now know", userData.access_token);
 
   // add this user to database, if it doesn't exist
   try {
