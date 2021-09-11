@@ -221,8 +221,6 @@ app.get("/settings", async (req, res) => {
 });
 
 app.post("/save_settings", async (req, res) => {
-  console.log(req.body);
-
   let dashboardId = "";
 
   if (!req.user.databases) {
@@ -315,8 +313,6 @@ app.get("/auth_callback", async (req, res) => {
       // add the user to the database
       await ref.set({ notionData: userData, dashboardPages: [] });
     }
-
-    console.log(userData.access_token);
 
     // set a cookie with their access token so they don't need to log in again
     req.session.access_token = userData.access_token;
