@@ -21,7 +21,6 @@ exports.getDatabase = async function () {
       id: page.id,
       task: page.properties.Task.title[0]?.plain_text,
       completed: page.properties.Completed.checkbox,
-      category: page.properties.Category.select.name,
       enddate: page.properties.Due
         ? page.properties.Due.date
         : new Date("2021-08-01"),

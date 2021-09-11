@@ -2,7 +2,7 @@ const container = document.getElementById("container");
 const barcontainer = document.getElementById("barcontainer");
 
 const getDataFromBackend = async () => {
-  const rest = await fetch("/users");
+  const rest = await fetch("/notion_data");
   const data = await rest.json();
   return data;
 };

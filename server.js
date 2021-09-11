@@ -94,9 +94,9 @@ nunjucks.configure("views", {
   express: app,
 });
 
-app.get("/users", async (req, res) => {
-  const users = await getDatabase();
-  res.json(users);
+app.get("/notion_data", async (req, res) => {
+  const notion_data = await getDatabase();
+  res.json(notion_data);
 });
 
 app.get("/", async (req, res) => {
