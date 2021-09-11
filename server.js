@@ -95,7 +95,20 @@ nunjucks.configure("views", {
 });
 
 app.get("/notion_data", async (req, res) => {
-  const notion_data = await getDatabase();
+  let notion_token = "";
+  let tasks_db_id,
+    epics_db_id = "";
+  if (req.user) {
+    // use the user's API token :)
+    notion_token = req.user.notionData.access_token;
+  } else {
+    // use victoria's API and pages
+    notion_token = process.env.NOTION_API_KEY;
+    epics_db_id = process.env.NOTION_API_DATABASE_EPIC;
+    tasks_db_id = process.env.NOTION_API_DATABASE_TASK;
+  }
+
+  const notion_data = await getDatabase(notion_token, epics_db_id, tasks_db_id);
   res.json(notion_data);
 });
 

@@ -1,19 +1,17 @@
 // this will allow us to import our variable
 require("dotenv").config();
 // the following lines are required to initialize a Notion client
-const { Client } = require("@notionhq/client");
 
-// this line initializes the Notion Client using our key
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const taskDatabaseId = process.env.NOTION_API_DATABASE_TASK;
-const epicDatabaseId = process.env.NOTION_API_DATABASE_EPIC;
+exports.getDatabase = async function (notion_token, epics_db_id, tasks_db_id) {
+  // this line initializes the Notion Client using our key
+  const { Client } = require("@notionhq/client");
+  const notion = new Client({ auth: notion_token });
 
-exports.getDatabase = async function () {
   const responseTask = await notion.databases.query({
-    database_id: taskDatabaseId,
+    database_id: tasks_db_id,
   });
   const responseEpic = await notion.databases.query({
-    database_id: epicDatabaseId,
+    database_id: epics_db_id,
   });
 
   const taskResponseResults = responseTask.results.map((page) => {
