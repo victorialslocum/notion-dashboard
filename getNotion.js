@@ -22,7 +22,7 @@ exports.getDatabase = async function (notion_token, epics_db_id, tasks_db_id) {
       enddate: page.properties.Due
         ? page.properties.Due.date
         : new Date("2021-08-01"),
-      epicID: page.properties.Epics.relation,
+      epicID: page.properties.Goal.relation,
     };
   });
 

@@ -269,13 +269,14 @@ app.get("/logout", async (req, res) => {
 });
 
 app.get("/dashboard", async (req, res) => {
-  if (!req.user.pages) {
+  if (!req.user.databases) {
     // if they don't have any pages added, take them to the config page
     res.redirect("/settings");
     return;
   }
 
-  res.send("coming soon");
+  // we don't need to send it data for now
+  res.render("pages/dashboard.nj");
 });
 
 app.get("/auth_callback", async (req, res) => {
