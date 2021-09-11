@@ -10,6 +10,14 @@ const moduleToFetch = require("./getNotion");
 var admin = require("firebase-admin");
 require("dotenv").config();
 
+function uuidv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 // grab the firebase credentials from an environment variable
 // the environment variable is a base64 encoded ServiceAccount object
 let theCreds = admin.credential.cert(
@@ -105,20 +113,25 @@ nunjucks.configure("views", {
 app.get("/notion_data", async (req, res) => {
   let notion_token = "";
   let tasks_db_id,
-    epics_db_id = "";
+    goals_db_id = "";
   if (req.user) {
     // use the user's API token :)
     // epics_db_id = "";
     // tasks_db_id = "";
+    const dbRef = database.ref(`/dashboards/${req.user.databases[0]}`);
+    const response = await dbRef.once("value");
+    const dashboard = response.val();
     notion_token = req.user.notionData.access_token;
+    goals_db_id = dashboard.goals;
+    tasks_db_id = dashboard.tasks;
   } else {
     // use victoria's API and pages
     notion_token = process.env.NOTION_API_KEY;
-    epics_db_id = process.env.NOTION_API_DATABASE_EPIC;
+    goals_db_id = process.env.NOTION_API_DATABASE_EPIC;
     tasks_db_id = process.env.NOTION_API_DATABASE_TASK;
   }
 
-  const notion_data = await getDatabase(notion_token, epics_db_id, tasks_db_id);
+  const notion_data = await getDatabase(notion_token, goals_db_id, tasks_db_id);
   res.json(notion_data);
 });
 
@@ -209,7 +222,33 @@ app.get("/settings", async (req, res) => {
 
 app.post("/save_settings", async (req, res) => {
   console.log(req.body);
-  res.send("tehehehehe");
+
+  let dashboardId = "";
+
+  if (!req.user.databases) {
+    dashboardId = uuidv4();
+  } else {
+    dashboardId = req.user.databases[0];
+  }
+
+  const dbRef = database.ref(`/dashboards/${dashboardId}`);
+  // const response = await ref.once("value");
+  // const user = response.val();
+
+  await dbRef.set({
+    owners: [req.user.notionData.access_token],
+    goals: req.body["goals-db"],
+    tasks: req.body["tasks-db"],
+  });
+
+  const userRef = database.ref(`/users/${req.user.notionData.access_token}`);
+  let response = await userRef.once("value");
+  let user = response.val();
+  user.databases = [dashboardId];
+
+  await userRef.set(user);
+
+  res.redirect("/dashboard");
 });
 
 app.get("/auth", async (req, res) => {
@@ -225,7 +264,8 @@ app.get("/auth", async (req, res) => {
 
 app.get("/logout", async (req, res) => {
   req.session.access_token = null;
-  res.redirect("/auth");
+
+  res.redirect("/");
 });
 
 app.get("/dashboard", async (req, res) => {

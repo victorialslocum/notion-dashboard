@@ -25,7 +25,7 @@
             <div class="field">
               <label for="tasks" class="label is-medium">Tasks page <span class="has-tooltip-right has-tooltip-multiline" data-tooltip="A database in Notion with your tasks list. May take up to 5 mins to load from Notion."><span class="tag is-light">?</span></span></label>
               <div class="select is-medium {{ "is-primary" if (tasksGuessId) else null }}">
-                <select name="taks-db" id="tasks" name="tasks">
+                <select name="tasks-db" id="tasks" name="tasks">
                   {% for database in databases %}
                       <option 
                           value="{{ database.id }}"
@@ -33,6 +33,7 @@
                       >
                           {{ database.emoji }} {{ database.name }}
                       </option>
+                  
                   {% else %}
                       <option>No databases found... may take a minute</option>
                   {% endfor %}
